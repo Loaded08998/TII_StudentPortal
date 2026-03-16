@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
@@ -11,8 +11,18 @@ import Attendance from './pages/Attendance';
 
 function AppContent({ isAuthenticated, setIsAuthenticated }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   // Redirect to login if not authenticated
   if (!isAuthenticated && location.pathname !== '/login') {
@@ -114,6 +124,16 @@ function AppContent({ isAuthenticated, setIsAuthenticated }) {
         {/* Top Bar with Logo */}
         <div className="top-bar">
           <div className="top-bar-spacer" />
+          
+          <button 
+            className="theme-toggle" 
+            onClick={toggleTheme} 
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
+
           <img src="/nmims-logo.png" alt="NMIMS University" className="top-bar-logo" />
         </div>
 

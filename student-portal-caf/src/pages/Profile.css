@@ -153,7 +153,7 @@
 
 .blood-group-badge {
   display: inline-block;
-  background: rgba(196, 30, 58, 0.12);
+  background: var(--accent-primary-light);
   color: var(--accent-primary) !important;
   padding: 2px 12px;
   border-radius: 20px;

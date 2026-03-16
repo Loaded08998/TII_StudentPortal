@@ -9,6 +9,7 @@
   --bg-card-hover: #272a34;
   --bg-sidebar: #131519;
   --bg-input: #1a1c24;
+  --bg-glass: rgba(30, 32, 40, 0.6);
 
   --text-primary: #f0f1f4;
   --text-secondary: #8d919f;
@@ -73,6 +74,31 @@
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ===== Light Theme Overrides ===== */
+[data-theme='light'] {
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f3f5;
+  --bg-sidebar: #ffffff;
+  --bg-input: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.6);
+
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --text-muted: #868e96;
+
+  --accent-primary-light: rgba(196, 30, 58, 0.08);
+  --gradient-card: linear-gradient(145deg, rgba(255,255,255,1) 0%, rgba(248,249,250,1) 100%);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-active: rgba(196, 30, 58, 0.4);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 20px rgba(196, 30, 58, 0.1);
+}
+
 /* ===== Reset & Base ===== */
 *,
 *::before,
@@ -95,6 +121,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 a {
@@ -148,10 +175,11 @@ img {
 
 /* ===== Utility Classes ===== */
 .glass {
-  background: rgba(30, 32, 40, 0.6);
+  background: var(--bg-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
+  transition: all var(--transition-base);
 }
 
 .badge {
