@@ -1,0 +1,130 @@
+/* ===== Campus Map Page ===== */
+.campus-map-page {
+  max-width: 1100px;
+}
+
+/* Floor Selector */
+.floor-selector {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.floor-btn {
+  padding: var(--space-sm) var(--space-xl);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.floor-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+.floor-btn.active {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: transparent;
+  box-shadow: var(--shadow-glow);
+}
+
+/* Map Container */
+.map-container {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: var(--space-xl);
+  padding: var(--space-xl) !important;
+}
+
+.map-visual {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Map Info */
+.map-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-info h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.map-desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-xl);
+}
+
+.room-list {
+  flex: 1;
+}
+
+.room-list h4 {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-md);
+}
+
+.room-list ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.room-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+}
+
+.room-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-round);
+  background: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-container {
+    grid-template-columns: 1fr;
+  }
+
+  .map-visual {
+    min-height: 240px;
+  }
+}

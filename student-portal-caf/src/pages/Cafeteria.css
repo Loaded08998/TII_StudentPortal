@@ -1,0 +1,210 @@
+/* ===== Cafeteria Page ===== */
+.cafeteria-page {
+  max-width: 1100px;
+  padding-bottom: 200px;
+}
+
+/* Category Tabs */
+.caf-categories {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  overflow-x: auto;
+  padding-bottom: var(--space-xs);
+}
+
+.caf-cat-btn {
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: 20px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.caf-cat-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+.caf-cat-btn.active {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: transparent;
+}
+
+/* Menu Grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+.menu-card {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-lg) !important;
+  align-items: flex-start;
+}
+
+.menu-emoji {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(108, 92, 231, 0.06);
+  border-radius: var(--radius-md);
+}
+
+.menu-details {
+  flex: 1;
+}
+
+.menu-details h4 {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.menu-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  line-height: 1.4;
+}
+
+.menu-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-price {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--accent-secondary);
+}
+
+/* Quantity Control */
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--bg-primary);
+  border-radius: 20px;
+  padding: 2px;
+}
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+}
+
+.qty-btn:hover {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary);
+  color: white;
+}
+
+.qty-value {
+  min-width: 22px;
+  text-align: center;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+/* Order Summary */
+.order-summary {
+  position: fixed;
+  bottom: 0;
+  left: 240px;
+  right: 0;
+  padding: var(--space-lg) var(--space-2xl);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  z-index: 50;
+  animation: slideUp 0.35s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.order-summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.order-summary-header h3 {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.order-count {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-color);
+  margin-bottom: var(--space-md);
+}
+
+.total-value {
+  color: var(--accent-secondary);
+}
+
+.order-btn {
+  width: 100%;
+  padding: var(--space-md) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+@media (max-width: 768px) {
+  .order-summary {
+    left: 0;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}
