@@ -7,6 +7,7 @@ import Cafeteria from './pages/Cafeteria';
 import Profile from './pages/Profile';
 import CampusMap from './pages/CampusMap';
 import Login from './pages/Login'; // importing the new Login page
+import Attendance from './pages/Attendance';
 
 function AppContent({ isAuthenticated, setIsAuthenticated }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -123,6 +124,7 @@ function AppContent({ isAuthenticated, setIsAuthenticated }) {
           <Route path="/cafeteria" element={<Cafeteria />} />
           <Route path="/campus-map" element={<CampusMap />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/attendance" element={<Attendance />} />
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </main>

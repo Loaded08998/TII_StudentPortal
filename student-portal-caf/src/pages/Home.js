@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
+  const navigate = useNavigate();
   const attendance = 87;
 
   const notifications = [
@@ -74,7 +76,12 @@ function Home() {
           <span className="student-program">PGDM-MM — NMIMS</span>
 
           {/* Attendance Circle */}
-          <div className="attendance-section">
+          <div 
+            className="attendance-section clickable"
+            onClick={() => navigate('/attendance')}
+            role="button"
+            tabIndex={0}
+          >
             <div className="attendance-ring">
               <svg viewBox="0 0 120 120" className="attendance-svg">
                 <circle

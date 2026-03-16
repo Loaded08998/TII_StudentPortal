@@ -254,6 +254,29 @@ app.post('/api/login', (req, res) => {
   }
 });
 
+// Attendance endpoint
+const attendanceData = [
+  { srNo: 1, course: 'Constitution of India', type: 'Theory', conducted: 3, attended: 3, exemption: 0, total: 3, percent: 100.00, notUpdated: 0 },
+  { srNo: 2, course: 'English Communication', type: 'Practical', conducted: 10, attended: 9, exemption: 0, total: 9, percent: 90.00, notUpdated: 0 },
+  { srNo: 3, course: 'Linear Algebra and Differential Equatio', type: 'Theory', conducted: 12, attended: 12, exemption: 0, total: 12, percent: 90.00, notUpdated: 0 },
+  { srNo: 4, course: 'Linear Algebra and Differential Equatio', type: 'Practical', conducted: 8, attended: 6, exemption: 0, total: 6, percent: null, notUpdated: 0 },
+  { srNo: 5, course: 'Principles of Economics and Management', type: 'Theory', conducted: 9, attended: 8, exemption: 0, total: 8, percent: 88.89, notUpdated: 0 },
+  { srNo: 6, course: 'PROGRAMMING WITH PYTHON', type: 'Theory', conducted: 3, attended: 3, exemption: 0, total: 3, percent: 77.78, notUpdated: 0 },
+  { srNo: 7, course: 'PROGRAMMING WITH PYTHON', type: 'Practical', conducted: 6, attended: 4, exemption: 0, total: 4, percent: null, notUpdated: 0 },
+  { srNo: 8, course: 'ENVIRONMENTAL STUDIES', type: 'Theory', conducted: 4, attended: 3, exemption: 0, total: 3, percent: 75.00, notUpdated: 0 },
+  { srNo: 9, course: 'ELEMENTS OF BIOLOGY', type: 'Theory', conducted: 9, attended: 9, exemption: 0, total: 9, percent: 100.00, notUpdated: 0 },
+  { srNo: 10, course: 'ELEMENTS OF BIOLOGY', type: 'Tutorial', conducted: 4, attended: 4, exemption: 0, total: 4, percent: null, notUpdated: 0 },
+  { srNo: 11, course: 'INTELLIGENT SYSTEMS', type: 'Theory', conducted: 7, attended: 7, exemption: 0, total: 7, percent: 100.00, notUpdated: 0 },
+  { srNo: 12, course: 'INTELLIGENT SYSTEMS', type: 'Practical', conducted: 6, attended: 6, exemption: 0, total: 6, percent: null, notUpdated: 0 },
+  { srNo: 13, course: 'TRANSFORMING IDEAS TO INNOVATION', type: 'Practical', conducted: 10, attended: 10, exemption: 0, total: 10, percent: 100.00, notUpdated: 0 },
+  { srNo: 14, course: 'PRODUCT REALIZATION', type: 'Theory', conducted: 5, attended: 4, exemption: 0, total: 4, percent: 81.82, notUpdated: 0 },
+  { srNo: 15, course: 'PRODUCT REALIZATION', type: 'Practical', conducted: 6, attended: 5, exemption: 0, total: 5, percent: null, notUpdated: 0 }
+];
+
+app.get('/api/attendance', (req, res) => {
+  res.json(attendanceData);
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Backend API Server running at http://localhost:${PORT}`);

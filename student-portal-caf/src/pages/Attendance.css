@@ -1,0 +1,95 @@
+.attendance-page {
+  padding: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.attendance-header {
+  margin-bottom: var(--space-2xl);
+  background: white; /* Maintaining the light background for the report feel as per the image */
+  color: black;
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+}
+
+.uni-title {
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: var(--space-xl);
+  text-transform: uppercase;
+}
+
+.student-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1rem;
+}
+
+.student-info-table td {
+  padding: var(--space-xs) 0;
+  vertical-align: top;
+}
+
+.student-info-table td:first-child {
+  width: 35%;
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  background: white; /* Keeping true to the paper-report look */
+  padding: 0;
+}
+
+.nmims-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: black;
+  font-family: Arial, sans-serif; /* The table in the image uses a cleaner sans-serif font compared to the header */
+  font-size: 0.9rem;
+}
+
+.nmims-table th, .nmims-table td {
+  border: 1px solid #000;
+  padding: 8px 6px;
+  vertical-align: middle;
+}
+
+.nmims-table th {
+  font-weight: bold;
+  text-align: center;
+  background-color: transparent;
+  white-space: pre-wrap; /* Allows text to wrap exactly like the image */
+}
+
+.nmims-table td.center {
+  text-align: center;
+}
+
+.loading-state, .error-state {
+  padding: var(--space-2xl);
+  text-align: center;
+  color: var(--text-primary);
+  background: var(--bg-card);
+}
+
+.error-state {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.pagination-footer {
+  text-align: center;
+  margin-top: var(--space-xl);
+  color: var(--text-secondary);
+  font-family: "Times New Roman", Times, serif;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

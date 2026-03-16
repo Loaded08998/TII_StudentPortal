@@ -49,6 +49,17 @@
 .attendance-section {
   padding-top: var(--space-lg);
   border-top: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-md);
+}
+
+.attendance-section.clickable {
+  cursor: pointer;
+}
+
+.attendance-section.clickable:hover {
+  background: var(--bg-primary);
+  transform: translateY(-2px);
 }
 
 .attendance-ring {
