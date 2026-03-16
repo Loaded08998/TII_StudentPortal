@@ -32,15 +32,15 @@ function Attendance() {
           <tbody>
             <tr>
               <td><strong>Student Name</strong></td>
-              <td>KRISH MEHTA</td>
+              <td>SHAURYA CHABRA</td>
             </tr>
             <tr>
-              <td><strong>Student Number</strong></td>
-              <td>70122500027</td>
+              <td><strong>SAP ID</strong></td>
+              <td>7722983672</td>
             </tr>
             <tr>
               <td><strong>Roll No.</strong></td>
-              <td>I041</td>
+              <td>M041</td>
             </tr>
             <tr>
               <td><strong>Academic Year & Academic Session</strong></td>
@@ -48,7 +48,7 @@ function Attendance() {
             </tr>
             <tr>
               <td><strong>Program Name</strong></td>
-              <td>B Tech (Artificial Intelligence)</td>
+              <td>PGDM-MM</td>
             </tr>
             <tr>
               <td><strong>Attendance Report Duration :</strong></td>

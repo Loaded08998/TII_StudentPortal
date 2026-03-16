@@ -51,7 +51,7 @@ function Profile() {
           <div className="profile-id-card">
             <div className="id-card-header">
               <img src="/nmims-logo.png" alt="NMIMS" className="id-card-logo" />
-              <span>Student ID</span>
+              <span>SAP ID</span>
             </div>
             <div className="id-card-number">{profile.studentId}</div>
           </div>
@@ -71,7 +71,7 @@ function Profile() {
                 <span>{profile.name}</span>
               </div>
               <div className="detail-field">
-                <label>Student ID</label>
+                <label>SAP ID</label>
                 <span>{profile.studentId}</span>
               </div>
               <div className="detail-field">
