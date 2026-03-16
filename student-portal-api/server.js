@@ -240,6 +240,20 @@ app.get('/api/menu', (req, res) => {
   res.json(menuSections);
 });
 
+// Auth endpoint
+const users = [{ username: 'shaurya', password: 'password123' }];
+
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find(u => u.username === username && u.password === password);
+  
+  if (user) {
+    res.json({ success: true, message: 'Login successful' });
+  } else {
+    res.status(401).json({ success: false, message: 'Invalid username or password' });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Backend API Server running at http://localhost:${PORT}`);

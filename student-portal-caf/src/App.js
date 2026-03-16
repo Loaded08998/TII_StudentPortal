@@ -6,11 +6,27 @@ import Library from './pages/Library';
 import Cafeteria from './pages/Cafeteria';
 import Profile from './pages/Profile';
 import CampusMap from './pages/CampusMap';
+import Login from './pages/Login'; // importing the new Login page
 
-function AppContent() {
+function AppContent({ isAuthenticated, setIsAuthenticated }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Redirect to login if not authenticated
+  if (!isAuthenticated && location.pathname !== '/login') {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Hide the sidebar and topbar if on the login page
+  if (location.pathname === '/login') {
+    return (
+      <Routes>
+        <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    );
+  }
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
@@ -19,6 +35,12 @@ function AppContent() {
 
   const handleProfileClick = () => {
     navigate('/profile');
+    closeSidebar();
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    navigate('/login');
     closeSidebar();
   };
 
@@ -78,6 +100,11 @@ function AppContent() {
             </div>
             <span className="sidebar-profile-arrow">›</span>
           </button>
+          
+          <button className="sidebar-logout-btn" onClick={handleLogout} title="Log Out">
+            <span className="nav-icon">🚪</span>
+            Log Out
+          </button>
         </div>
       </aside>
 
@@ -96,6 +123,7 @@ function AppContent() {
           <Route path="/cafeteria" element={<Cafeteria />} />
           <Route path="/campus-map" element={<CampusMap />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </main>
     </div>
@@ -103,9 +131,11 @@ function AppContent() {
 }
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <Router>
-      <AppContent />
+      <AppContent isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
     </Router>
   );
 }
