@@ -2,35 +2,24 @@ import React, { useState } from 'react';
 import './Profile.css';
 
 function Profile() {
-  const [profile, setProfile] = useState({
-    name: 'Ahmed Al-Rashidi',
-    studentId: 'TII-20240138',
-    major: 'Computer Engineering',
-    email: 'ahmed.rashidi@tii.edu',
-    phone: '+971 50 123 4567',
-    year: '3rd Year',
-    advisor: 'Dr. Sarah Mitchell',
-    gpa: '3.72',
+  const [profile] = useState({
+    name: 'Shaurya Chabra',
+    studentId: '7722983672',
+    program: 'PGDM-MM',
+    institute: 'NMIMS Global Access School for Continuing Education',
+    dob: '12/07/1998',
+    batch: 'Jan 2020',
+    contact: '9329544274',
+    bloodGroup: 'AB+',
+    email: 'shaurya.chabra@nmims.edu',
   });
 
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState({ ...profile });
   const [notifications, setNotifications] = useState({
     email: true,
     sms: false,
     announcements: true,
     grades: true,
   });
-
-  const handleSave = () => {
-    setProfile(draft);
-    setEditing(false);
-  };
-
-  const handleCancel = () => {
-    setDraft({ ...profile });
-    setEditing(false);
-  };
 
   const toggleNotification = (key) => {
     setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -39,36 +28,32 @@ function Profile() {
   return (
     <div className="profile-page">
       <div className="page-header">
-        <h2>Profile 👤</h2>
-        <p>Manage your personal information and preferences</p>
+        <h2>My Profile 👤</h2>
+        <p>Your personal information and preferences</p>
       </div>
 
       <div className="profile-layout">
         {/* Profile Card */}
         <div className="profile-card card">
           <div className="profile-avatar-section">
-            <div className="profile-avatar">AR</div>
+            <div className="profile-avatar-img-wrap">
+              <img src="/student-avatar.png" alt="Shaurya Chabra" className="profile-avatar-photo" />
+            </div>
             <h3>{profile.name}</h3>
-            <span className="profile-id">{profile.studentId}</span>
+            <span className="profile-program">{profile.program}</span>
+            <span className="profile-institute">{profile.institute}</span>
             <div className="profile-badges">
-              <span className="badge badge-info">{profile.year}</span>
+              <span className="badge badge-info">{profile.batch}</span>
               <span className="badge badge-success">Active</span>
             </div>
           </div>
 
-          <div className="profile-stat-row">
-            <div className="profile-stat">
-              <span className="profile-stat-value">{profile.gpa}</span>
-              <span className="profile-stat-label">GPA</span>
+          <div className="profile-id-card">
+            <div className="id-card-header">
+              <img src="/nmims-logo.png" alt="NMIMS" className="id-card-logo" />
+              <span>Student ID</span>
             </div>
-            <div className="profile-stat">
-              <span className="profile-stat-value">42</span>
-              <span className="profile-stat-label">Credits</span>
-            </div>
-            <div className="profile-stat">
-              <span className="profile-stat-value">6</span>
-              <span className="profile-stat-label">Courses</span>
-            </div>
+            <div className="id-card-number">{profile.studentId}</div>
           </div>
         </div>
 
@@ -78,56 +63,44 @@ function Profile() {
           <div className="detail-section card">
             <div className="detail-section-header">
               <h3>Personal Information</h3>
-              {!editing ? (
-                <button className="btn-secondary" onClick={() => setEditing(true)}>✏️ Edit</button>
-              ) : (
-                <div className="edit-actions">
-                  <button className="btn-primary" onClick={handleSave}>Save</button>
-                  <button className="btn-secondary" onClick={handleCancel}>Cancel</button>
-                </div>
-              )}
             </div>
 
             <div className="detail-grid">
               <div className="detail-field">
                 <label>Full Name</label>
-                {editing ? (
-                  <input value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} />
-                ) : (
-                  <span>{profile.name}</span>
-                )}
+                <span>{profile.name}</span>
               </div>
               <div className="detail-field">
                 <label>Student ID</label>
                 <span>{profile.studentId}</span>
               </div>
               <div className="detail-field">
-                <label>Major</label>
-                {editing ? (
-                  <input value={draft.major} onChange={(e) => setDraft({ ...draft, major: e.target.value })} />
-                ) : (
-                  <span>{profile.major}</span>
-                )}
+                <label>Program</label>
+                <span>{profile.program}</span>
+              </div>
+              <div className="detail-field">
+                <label>Institute</label>
+                <span>{profile.institute}</span>
+              </div>
+              <div className="detail-field">
+                <label>Date of Birth</label>
+                <span>{profile.dob}</span>
+              </div>
+              <div className="detail-field">
+                <label>Batch</label>
+                <span>{profile.batch}</span>
+              </div>
+              <div className="detail-field">
+                <label>Contact</label>
+                <span>{profile.contact}</span>
               </div>
               <div className="detail-field">
                 <label>Email</label>
-                {editing ? (
-                  <input type="email" value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} />
-                ) : (
-                  <span>{profile.email}</span>
-                )}
+                <span>{profile.email}</span>
               </div>
               <div className="detail-field">
-                <label>Phone</label>
-                {editing ? (
-                  <input value={draft.phone} onChange={(e) => setDraft({ ...draft, phone: e.target.value })} />
-                ) : (
-                  <span>{profile.phone}</span>
-                )}
-              </div>
-              <div className="detail-field">
-                <label>Academic Advisor</label>
-                <span>{profile.advisor}</span>
+                <label>Blood Group</label>
+                <span className="blood-group-badge">{profile.bloodGroup}</span>
               </div>
             </div>
           </div>

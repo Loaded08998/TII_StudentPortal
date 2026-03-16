@@ -2,97 +2,122 @@ import React from 'react';
 import './Home.css';
 
 function Home() {
-  const stats = [
-    { label: 'Current GPA', value: '3.72', icon: '📊', gradient: 'gradient-primary' },
-    { label: 'Upcoming Classes', value: '3', icon: '📅', gradient: 'gradient-secondary' },
-    { label: 'Library Dues', value: '$0.00', icon: '📖', gradient: 'gradient-success' },
-    { label: 'Cafeteria Balance', value: '$45.50', icon: '💳', gradient: 'gradient-warm' },
-  ];
+  const attendance = 87;
 
-  const announcements = [
+  const notifications = [
     {
       id: 1,
-      title: 'Spring Break Schedule',
-      date: 'Mar 15, 2026',
-      body: 'Campus facilities will operate on reduced hours from March 20–28. The library closes at 5 PM and the cafeteria at 3 PM.',
-      badge: 'Important',
+      type: 'reschedule',
+      icon: '🔄',
+      title: 'Data Structures — Class Rescheduled',
+      body: 'Your Data Structures lecture on Wednesday, March 19 at 9:00 AM has been moved to Thursday, March 20 at 11:00 AM in Room 204.',
+      time: '2 hours ago',
       badgeClass: 'badge-warning',
+      badgeText: 'Rescheduled',
     },
     {
       id: 2,
-      title: 'New Books Added to Library',
-      date: 'Mar 14, 2026',
-      body: 'Over 200 new titles have been added to the engineering and sciences sections. Check them out today!',
-      badge: 'New',
+      type: 'event',
+      icon: '🎯',
+      title: 'Tech Fest 2026 — This Saturday',
+      body: 'The annual NMIMS Tech Fest is happening this Saturday, March 22. Hackathon registrations close on Friday. Don\'t miss out!',
+      time: '5 hours ago',
       badgeClass: 'badge-info',
+      badgeText: 'Event',
     },
     {
       id: 3,
-      title: 'Cafeteria Menu Update',
-      date: 'Mar 12, 2026',
-      body: 'We\'ve added new healthy meal options including vegan bowls and fresh smoothies. Available starting next Monday.',
-      badge: 'Update',
-      badgeClass: 'badge-success',
+      type: 'reschedule',
+      icon: '🔄',
+      title: 'Linear Algebra — Venue Changed',
+      body: 'Linear Algebra class on Monday, March 17, will now be held in Lecture Hall B instead of Room 118.',
+      time: '1 day ago',
+      badgeClass: 'badge-warning',
+      badgeText: 'Change',
     },
-  ];
-
-  const schedule = [
-    { time: '09:00 AM', course: 'Data Structures', room: 'Room 204', color: 'var(--accent-primary)' },
-    { time: '11:00 AM', course: 'Linear Algebra', room: 'Room 118', color: 'var(--accent-secondary)' },
-    { time: '02:00 PM', course: 'Digital Electronics', room: 'Lab 3B', color: 'var(--accent-warning)' },
+    {
+      id: 4,
+      type: 'event',
+      icon: '🏆',
+      title: 'Inter-College Sports Meet — March 25',
+      body: 'Sports meet registrations are open. Events include cricket, badminton, table tennis, and athletics. Register at the sports office.',
+      time: '2 days ago',
+      badgeClass: 'badge-success',
+      badgeText: 'Event',
+    },
+    {
+      id: 5,
+      type: 'alert',
+      icon: '⚠️',
+      title: 'Semester Fee Deadline — March 28',
+      body: 'Last date for semester fee payment is March 28. Late submissions will attract a penalty. Visit the finance portal to pay.',
+      time: '3 days ago',
+      badgeClass: 'badge-danger',
+      badgeText: 'Alert',
+    },
   ];
 
   return (
     <div className="home-page">
       <div className="page-header">
-        <h2>Welcome back, Ahmed 👋</h2>
-        <p>Here's what's happening today — Monday, March 17, 2026</p>
+        <h2>Welcome, Shaurya 👋</h2>
+        <p>Here's your overview for today — Monday, March 17, 2026</p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="stats-grid">
-        {stats.map((stat, idx) => (
-          <div className={`stat-card card ${stat.gradient}`} key={idx}>
-            <div className="stat-icon">{stat.icon}</div>
-            <div className="stat-info">
-              <span className="stat-value">{stat.value}</span>
-              <span className="stat-label">{stat.label}</span>
-            </div>
+      <div className="home-layout">
+        {/* Student Card */}
+        <div className="student-card card">
+          <div className="student-photo-wrap">
+            <img src="/student-avatar.png" alt="Shaurya Chabra" className="student-photo" />
           </div>
-        ))}
-      </div>
+          <h3 className="student-name">Shaurya Chabra</h3>
+          <span className="student-program">PGDM-MM — NMIMS</span>
 
-      {/* Content Row */}
-      <div className="home-content-row">
-        {/* Today's Schedule */}
-        <div className="schedule-section">
-          <h3>Today's Schedule</h3>
-          <div className="schedule-list">
-            {schedule.map((item, idx) => (
-              <div className="schedule-item card" key={idx}>
-                <div className="schedule-accent" style={{ background: item.color }} />
-                <div className="schedule-time">{item.time}</div>
-                <div className="schedule-details">
-                  <span className="schedule-course">{item.course}</span>
-                  <span className="schedule-room">{item.room}</span>
-                </div>
+          {/* Attendance Circle */}
+          <div className="attendance-section">
+            <div className="attendance-ring">
+              <svg viewBox="0 0 120 120" className="attendance-svg">
+                <circle
+                  cx="60" cy="60" r="52"
+                  fill="none"
+                  stroke="var(--border-color)"
+                  strokeWidth="8"
+                />
+                <circle
+                  cx="60" cy="60" r="52"
+                  fill="none"
+                  stroke="var(--accent-primary)"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  strokeDasharray={`${(attendance / 100) * 327} 327`}
+                  transform="rotate(-90 60 60)"
+                  className="attendance-progress"
+                />
+              </svg>
+              <div className="attendance-text">
+                <span className="attendance-value">{attendance}%</span>
+                <span className="attendance-label">Attendance</span>
               </div>
-            ))}
+            </div>
+            <p className="attendance-note">Semester Average</p>
           </div>
         </div>
 
-        {/* Announcements */}
-        <div className="announcements-section">
-          <h3>Announcements</h3>
-          <div className="announcements-list">
-            {announcements.map((a) => (
-              <div className="announcement-item card" key={a.id}>
-                <div className="announcement-header">
-                  <span className={`badge ${a.badgeClass}`}>{a.badge}</span>
-                  <span className="announcement-date">{a.date}</span>
+        {/* Notifications */}
+        <div className="notifications-section">
+          <h3>Notifications & Alerts</h3>
+          <div className="notifications-list">
+            {notifications.map((n) => (
+              <div className={`notification-card card`} key={n.id}>
+                <div className="notification-icon-wrap">{n.icon}</div>
+                <div className="notification-content">
+                  <div className="notification-top">
+                    <span className={`badge ${n.badgeClass}`}>{n.badgeText}</span>
+                    <span className="notification-time">{n.time}</span>
+                  </div>
+                  <h4>{n.title}</h4>
+                  <p>{n.body}</p>
                 </div>
-                <h4>{a.title}</h4>
-                <p>{a.body}</p>
               </div>
             ))}
           </div>

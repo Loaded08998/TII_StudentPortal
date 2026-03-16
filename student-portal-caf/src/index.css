@@ -1,38 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* ===== CSS Custom Properties (Design Tokens) ===== */
+/* ===== CSS Custom Properties (NMIMS Theme) ===== */
 :root {
-  /* Colors */
-  --bg-primary: #0f1117;
-  --bg-secondary: #1a1d27;
-  --bg-card: #222636;
-  --bg-card-hover: #2a2f42;
-  --bg-sidebar: #151823;
-  --bg-input: #1e2233;
+  /* NMIMS-inspired Colors — Red, Charcoal, White */
+  --bg-primary: #0e0f13;
+  --bg-secondary: #191b22;
+  --bg-card: #1e2028;
+  --bg-card-hover: #272a34;
+  --bg-sidebar: #131519;
+  --bg-input: #1a1c24;
 
-  --text-primary: #f0f2f5;
-  --text-secondary: #8b92a5;
-  --text-muted: #5a6178;
+  --text-primary: #f0f1f4;
+  --text-secondary: #8d919f;
+  --text-muted: #5c6070;
 
-  --accent-primary: #6c5ce7;
-  --accent-primary-hover: #7f71ea;
-  --accent-secondary: #00cec9;
-  --accent-warning: #fdcb6e;
-  --accent-danger: #e17055;
-  --accent-success: #00b894;
+  /* NMIMS Red primary */
+  --accent-primary: #C41E3A;
+  --accent-primary-hover: #d6354f;
+  --accent-primary-light: rgba(196, 30, 58, 0.12);
 
-  --gradient-primary: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-  --gradient-secondary: linear-gradient(135deg, #00cec9 0%, #81ecec 100%);
-  --gradient-warm: linear-gradient(135deg, #e17055 0%, #fdcb6e 100%);
-  --gradient-card: linear-gradient(145deg, rgba(34,38,54,0.8) 0%, rgba(26,29,39,0.9) 100%);
+  /* Charcoal secondary */
+  --accent-charcoal: #4A4A4A;
+  --accent-charcoal-light: #6B6B6B;
+
+  /* Supporting accents */
+  --accent-secondary: #e8c547;
+  --accent-warning: #f0a830;
+  --accent-danger: #e05555;
+  --accent-success: #2ecc71;
+  --accent-info: #3498db;
+
+  --gradient-primary: linear-gradient(135deg, #C41E3A 0%, #e04060 100%);
+  --gradient-warm: linear-gradient(135deg, #C41E3A 0%, #e8c547 100%);
+  --gradient-card: linear-gradient(145deg, rgba(30,32,40,0.8) 0%, rgba(25,27,34,0.9) 100%);
 
   --border-color: rgba(255, 255, 255, 0.06);
-  --border-active: rgba(108, 92, 231, 0.5);
+  --border-active: rgba(196, 30, 58, 0.5);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 20px rgba(108, 92, 231, 0.15);
+  --shadow-glow: 0 0 20px rgba(196, 30, 58, 0.15);
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -140,7 +148,7 @@ img {
 
 /* ===== Utility Classes ===== */
 .glass {
-  background: rgba(34, 38, 54, 0.5);
+  background: rgba(30, 32, 40, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
@@ -158,21 +166,21 @@ img {
 }
 
 .badge-success {
-  background: rgba(0, 184, 148, 0.15);
+  background: rgba(46, 204, 113, 0.15);
   color: var(--accent-success);
 }
 
 .badge-warning {
-  background: rgba(253, 203, 110, 0.15);
+  background: rgba(240, 168, 48, 0.15);
   color: var(--accent-warning);
 }
 
 .badge-danger {
-  background: rgba(225, 112, 85, 0.15);
+  background: rgba(224, 85, 85, 0.15);
   color: var(--accent-danger);
 }
 
 .badge-info {
-  background: rgba(108, 92, 231, 0.15);
+  background: rgba(196, 30, 58, 0.12);
   color: var(--accent-primary);
 }
