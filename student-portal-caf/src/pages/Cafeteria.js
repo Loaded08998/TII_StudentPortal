@@ -13,7 +13,8 @@ function Cafeteria() {
 
   // Fetch menu data from our new backend API
   useEffect(() => {
-    fetch('http://localhost:5000/api/menu')
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    fetch(`${apiUrl}/api/menu`)
       .then(res => {
         if (!res.ok) throw new Error('API request failed');
         return res.json();

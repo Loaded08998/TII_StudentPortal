@@ -7,7 +7,8 @@ function Attendance() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/attendance')
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    fetch(`${apiUrl}/api/attendance`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch attendance');
         return res.json();

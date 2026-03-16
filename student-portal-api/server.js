@@ -279,5 +279,5 @@ app.get('/api/attendance', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Backend API Server running at http://localhost:${PORT}`);
+  console.log(`Backend API Server running on port ${PORT}`);
 });
