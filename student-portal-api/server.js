@@ -240,6 +240,29 @@ app.get('/api/menu', (req, res) => {
   res.json(menuSections);
 });
 
+// Orders endpoint & storage
+const activeOrdersDB = [];
+
+app.post('/api/orders', (req, res) => {
+  const { items, totalPrice } = req.body;
+  if (!items || !items.length) {
+    return res.status(400).json({ success: false, message: 'Cart is empty' });
+  }
+
+  const orderId = 'ORD-' + Date.now() + Math.floor(Math.random() * 1000);
+  const newOrder = {
+    id: orderId,
+    items,
+    totalPrice,
+    status: 'active',
+    createdAt: new Date().toISOString()
+  };
+
+  activeOrdersDB.push(newOrder);
+
+  res.status(201).json({ success: true, order: newOrder });
+});
+
 // Auth endpoint
 const users = [{ username: 'shaurya', password: 'password123' }];
 

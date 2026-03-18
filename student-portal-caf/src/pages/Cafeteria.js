@@ -1,6 +1,42 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './Cafeteria.css';
 
+function OrderAccordion({ order }) {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <div className="order-accordion card">
+      <div 
+        className="order-accordion-header" 
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="order-accordion-info">
+          <strong className="order-id">{order.id}</strong>
+          <span className="order-status">{order.status.toUpperCase()}</span>
+          <div className="order-date">
+            {new Date(order.createdAt).toLocaleString()}
+          </div>
+        </div>
+        <div className="order-accordion-summary">
+          <span className="order-total">₹{order.totalPrice}</span>
+          <span className="order-chevron">{isOpen ? '▲' : '▼'}</span>
+        </div>
+      </div>
+      
+      {isOpen && (
+        <div className="order-accordion-body">
+          {order.items.map((item, idx) => (
+            <div className="order-item-row" key={idx}>
+              <span className="order-item-name">{item.qty}x {item.name} <span className="order-item-window">(W{item.window})</span></span>
+              <span className="order-item-price">₹{item.price * item.qty}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Cafeteria() {
   const [menuSections, setMenuSections] = useState([]);
   const [sectionNames, setSectionNames] = useState([]);
@@ -10,6 +46,18 @@ function Cafeteria() {
   const [checkoutDone, setCheckoutDone] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Active orders state with localStorage persistence
+  const [activeOrders, setActiveOrders] = useState(() => {
+    const saved = localStorage.getItem('cafeteria_orders');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [submittedOrder, setSubmittedOrder] = useState(null);
+
+  // Persist to localStorage whenever activeOrders changes
+  useEffect(() => {
+    localStorage.setItem('cafeteria_orders', JSON.stringify(activeOrders));
+  }, [activeOrders]);
 
   // Fetch menu data from our new backend API
   useEffect(() => {
@@ -70,10 +118,11 @@ function Cafeteria() {
   const totalItems = cartItems.reduce((sum, i) => sum + i.qty, 0);
   const totalPrice = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0);
 
-  /* Group cart items by window for the checkout confirmation */
+  /* Group submitted order items by window for the checkout confirmation */
   const windowGroups = useMemo(() => {
+    if (!submittedOrder) return [];
     const groups = {};
-    cartItems.forEach((item) => {
+    submittedOrder.items.forEach((item) => {
       if (!groups[item.window]) {
         groups[item.window] = {
           window: item.window,
@@ -90,17 +139,36 @@ function Cafeteria() {
       groups[item.window].items.push(item);
     });
     return Object.values(groups).sort((a, b) => a.window - b.window);
-    // eslint-disable-next-line
-  }, [cart]);
+  }, [submittedOrder]);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (cartItems.length > 0) {
-      setCheckoutDone(true);
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      try {
+        const res = await fetch(`${apiUrl}/api/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: cartItems, totalPrice })
+        });
+        const data = await res.json();
+        if (data.success) {
+          const newOrder = data.order;
+          setActiveOrders(prev => [newOrder, ...prev]);
+          setSubmittedOrder(newOrder);
+          setCart({});
+          setCheckoutDone(true);
+        } else {
+          alert('Failed to place order.');
+        }
+      } catch (err) {
+        console.error('Checkout error:', err);
+        alert('Could not connect to server to place order.');
+      }
     }
   };
 
   const handleNewOrder = () => {
-    setCart({});
+    setSubmittedOrder(null);
     setCheckoutDone(false);
     if (sectionNames.length > 0) {
       setActiveSection(sectionNames[0]);
@@ -131,13 +199,14 @@ function Cafeteria() {
   }
 
   /* ===== CHECKOUT CONFIRMATION VIEW ===== */
-  if (checkoutDone) {
+  if (checkoutDone && submittedOrder) {
     return (
       <div className="cafeteria-page">
         <div className="checkout-success">
           <div className="checkout-success-icon">✅</div>
           <h2>Order Placed!</h2>
-          <p>Your order of <strong>{totalItems} item{totalItems > 1 ? 's' : ''}</strong> totalling <strong>₹{totalPrice}</strong> has been placed.</p>
+          <p>Order ID: <strong>{submittedOrder.id}</strong></p>
+          <p>Your order totalling <strong>₹{submittedOrder.totalPrice}</strong> has been placed.</p>
         </div>
 
         <h3 className="collection-heading">Collection Windows</h3>
@@ -176,10 +245,10 @@ function Cafeteria() {
         <div className="checkout-total-bar glass">
           <div className="checkout-total-info">
             <span>Grand Total</span>
-            <span className="checkout-grand-total">₹{totalPrice}</span>
+            <span className="checkout-grand-total">₹{submittedOrder.totalPrice}</span>
           </div>
           <button className="btn-primary" onClick={handleNewOrder}>
-            🍽️ New Order
+            🍽️ Back to Menu
           </button>
         </div>
       </div>
@@ -193,6 +262,21 @@ function Cafeteria() {
         <h2>MPSTME Canteen 🍽️</h2>
         <p>Browse the menu, add items to your cart, and place your order</p>
       </div>
+
+      {/* Active Orders Section */}
+      {activeOrders.length > 0 && (
+        <div className="active-orders-section">
+          <div className="active-orders-header">
+            <h3>Your Active Orders</h3>
+            <span className="active-orders-count">{activeOrders.length}</span>
+          </div>
+          <div className="active-orders-list">
+            {activeOrders.map(order => (
+              <OrderAccordion order={order} key={order.id} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Section Tabs */}
       <div className="caf-categories">
