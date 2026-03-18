@@ -69,17 +69,19 @@
 /* ===== Menu Grid (list style for compact display) ===== */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
   background: transparent;
   border: none;
 }
 
 .menu-item-row {
   display: flex;
+  flex-wrap: wrap; /* Allow wrapping for very narrow containers */
   align-items: center;
   justify-content: space-between;
   padding: var(--space-md) var(--space-lg);
+  gap: var(--space-sm);
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -89,6 +91,8 @@
 .menu-item-row:hover {
   background: var(--bg-card-hover);
   border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .menu-item-row.in-cart {
@@ -98,25 +102,23 @@
 
 .menu-item-info {
   display: flex;
-  align-items: center;
-  gap: var(--space-lg);
+  flex-direction: column;
+  gap: 4px;
   flex: 1;
-  min-width: 0;
+  min-width: 140px;
 }
 
 .menu-item-name {
   font-size: var(--font-size-sm);
-  font-weight: 500;
-  flex: 1;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .menu-item-price {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: 700;
   color: var(--accent-secondary);
-  white-space: nowrap;
-  min-width: 50px;
-  text-align: right;
+  opacity: 0.9;
 }
 
 /* ===== Qty Control ===== */
@@ -519,8 +521,7 @@
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .menu-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 12px;
   }
 
   .cart-bar,
