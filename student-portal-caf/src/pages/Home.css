@@ -5,7 +5,7 @@
 
 .home-layout {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
   gap: var(--space-xl);
   align-items: start;
 }
